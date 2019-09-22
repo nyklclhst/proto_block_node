@@ -19,6 +19,8 @@ router.get('/', function(req, res, next) {
         console.log('error:', errCode);
         if(errCode === 500){
           return res.redirect(req.protocol+'://'+req.headers['host']+'/ask');
+        } else if(errCode === 200){
+          return res.redirect(req.protocol+'://'+req.headers['host']+'/data');
         } else {
           return res.redirect(req.protocol+'://'+req.hostname+':3000/auth/github');
         }

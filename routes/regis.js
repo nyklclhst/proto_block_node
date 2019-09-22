@@ -19,7 +19,7 @@ router.post('/', function(req, res){
     "email": email, 
     "tglPembuatan": tgl }
   request.post({
-    url: 'http://localhost:3001/api/userData',
+    url: req.protocol+'://'+req.hostname+':3001/api/userData',
     body: data,
     json: true
   }, function(error, response, body){
@@ -35,7 +35,6 @@ router.post('/', function(req, res){
       res.render('regis',{msg: 'failed'})
     }
   });
-  // console.log(JSON.stringify(data))
 })
 
 module.exports = router;

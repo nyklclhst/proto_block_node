@@ -1,4 +1,145 @@
-<ul><% for(var i=0; i < id.length; i++) { %>
-    <li><%= id[i] %></li>
-    <% } %>
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/datatables/datatables.min.js"></script>
+    <script type="text/javascript" src="/assets/js/table.js"></script>
+    <script src="/javascripts/data.js"></script>
+    <link rel="stylesheet" href="/stylesheets/data.css">
+    <title>Seculab Data Center - Tabel barang</title>
+</head>
+<body style="background-color:#1a2330; font-family: 'Montserrat',sans-serif" onload="load()">
+    <!-- ini navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #212121 !important">
+        <a class="navbar-brand" href="#">
+            <img src="/images/logosecu.png" width="40" height="40" alt="">
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        SECURLESS
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/data" active>Daftar Barang</a>
+                        <a class="dropdown-item" href="../daftarpinjam/">Daftar Pinjam</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+                <a class="nav-link mr-3" href="#" style="border-radius: 50px; border-style:solid; font-size: 80%; border-width: 2px; border-color: white; color: white; background-color:#212529;" data-toggle="modal" data-target="#newMenuModal">Pinjam Barang</a>
+            </span>
+            <span style="color: white;" class="mr-3">|</span>
+            <span class="navbar-text" style="color: white;">
+                Seculab Data Center
+            </span>
+        </div>
+    </nav>
+    <div id="body">
+    <!-- ini tabel -->
+    <div class="container" style="padding-left:0px; padding-right:0px;">
+    <div class="row pt-0">
+        <div class="col-md-3">
+            <IMG SRC="https://thumbs.gfycat.com/AccurateAgreeableDairycow.webp" style="width:300px;height:300px; ">
+        </div>
+        <div class="col-md-9 pt-0 d-flex justify-content-center ">
+            <div class="container mt-0 ">
+                <div class="table-responsive mt-5 ">
+                    <label for="isipan " style="color: white; font-size: 200%" class="d-flex justify-content-center "><strong>Daftar Barang</strong></label><br>
+                    <div id='root' hidden></div>
+                    <table class="table dataTable table-bordered table-hover table-dark" id="tbl_id" style="font-size: 80%;">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nama Barang</th>
+                                <th scope="col">Jumlah Barang</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl_body">
+                            <% for(var i=0; i < id.length; i++) { %>
+                            <tr>
+                                <td>
+                                    <%= id[i] %>
+                                </td>
+                                <td>
+                                    <%= name[i] %>
+                                </td>
+                                <td>
+                                    <%= sum[i] %>
+                                </td>
+                            </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="newMenuModal" tabindex="-1" role="dialog" aria-labelledby="newMenuModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newMenuModalLabel">Peminjaman barang</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="data" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="user" name="user" placeholder="Enter your name.." required>
+                        </div>
+                        <div class="form-group">
+                                <select name="idbarang" id="idbarang" class="form-control" required>
+                                    <% for(var i=0; i < id.length; i++) { %>
+                                    <option value="<%= id[i] %>"><%= name[i] %></option>
+                                    <% } %>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="jumlah_brg" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" name="jumlah_brg" placeholder="how many .." required min="1" maxlength="12">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="contact" name="contact" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" placeholder="Enter your phone number.." required min="0" minlength="10" maxlength="12">
+                        </div>
+                        <div class="form-group">
+                                <input type="date" class="form-control" id="kembali" name="kembali" placeholder="when you want bringback the stuff .." required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id='close' class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-info" onclick="loading()" id="submit">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div id="loader"></div>
+    <!-- Footer -->
+    <footer class="page-footer font-small fixed-bottom" style="background-color: #212121;">
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3" style="color: rgba(255, 255, 255, 0.6)">© 2019 Copyright:
+            <a href="#" style="color: rgba(255, 255, 255, 0.6)"> Seculab Data Center</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+    <p id='msg' hidden><%= msg %></p>
+    <p id='msg1' hidden><%= msg1 %></p>
+</body>
+</html>
